@@ -106,7 +106,12 @@
                 <td>{{$docente->apellido}}</td>
                 <td>{{$docente->email}}</td>
                 <td>{{$docente->telefono}}</td>
-                <td>{{$docente->rol}}</td>
+                <td>
+                @if ($docente->rol == "0")
+                        Coordinador
+                    @else 
+                        Docente                    
+                @endif</td>
                 <td>{{$docente->materia}}</td>
                 <td>
                 <a href="" data-bs-toggle="modal" data-bs-target="#modalEditar{{$docente->id}}" class="btn btn-warning btn-sm"><i class="fa-regular fa-pen-to-square"></i>
@@ -130,6 +135,10 @@
                         <div class="modal-body">
                             <form action="{{route("docentes.update", $docente->id)}}" method="post">
                                 @csrf
+                                <div class="mb-3">
+                                    <label for="idDocente" class="form-label" >Id Docente</label>
+                                    <input type="text" class="form-control" id="id" name="idD" value={{$docente->id}} disabled>
+                                </div>
                                 <div class="mb-3">
                                     <label for="nombreDocente" class="form-label">Nombre</label>
                                     <input type="text" class="form-control" id="nombre" name="nombreD" value={{$docente->nombre}}>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Docente;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class DocenteController extends Controller
 {
@@ -72,7 +73,24 @@ class DocenteController extends Controller
      */
     public function update(Request $request)
     {
-        return $request;
+        $sql=DB::update('update docentes set nombre=?, apellido=?, telefono=?, rol=?, materia=? where id= ?', [
+            /*$request->idD,*/
+            $request->nombreD,
+            $request->apellidoD,
+            $request->telefonoD,
+            /*$request->emailD,*/
+            $request->rolD,
+            $request->materiaD,
+            $request->idD
+        ]);
+
+        if ($sql == true){
+            return back()->with("correcto", "Docente modificado correctamente");
+        } else {
+            return back()->with("incorrecto", "Error al modificar docente");
+        }
+
+        return;
     }
 
     /**
