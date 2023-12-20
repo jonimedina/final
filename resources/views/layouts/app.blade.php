@@ -11,6 +11,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    <link rel="icon" href="{{ asset('favicon.ico') }}">
+
 </head>
 
 <header class="p-3 text-bg-dark">
