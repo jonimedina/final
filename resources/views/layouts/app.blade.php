@@ -7,13 +7,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script><link rel="icon" href="{!! asset('cate.ico') !!}" type="image/x-icon">
     <script src="https://kit.fontawesome.com/e1bfb7b0a2.js" crossorigin="anonymous"></script>
-    <style>
-        html{
-            min-height: 100%;
-            background: linear-gradient(0deg, #ffffff 0%, #bababa 66%);
-        }
-    </style>
-
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Scripts -->
@@ -67,7 +60,7 @@
                                     <ul class="dropdown-menu text-small shadow">
                                         <li><a class="dropdown-item" href="#">Mis datos</a></li>
                                         <li><a class="dropdown-item" href="{{route("docentes.index")}}">Docentes</a></li>
-                                        <li><a class="dropdown-item" href="#">Estudiantes</a></li>
+                                        <li><a class="dropdown-item" href="{{route("estudiantes.index")}}">Estudiantes</a></li>
                                         <li><hr class="dropdown-divider"></li>
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
@@ -112,7 +105,7 @@
             <ul class="nav justify-content-center border-bottom pb-3 mb-3">
                 <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Mis Datos</a></li>
                 <li class="nav-item"><a href="{{route("docentes.index")}}" class="nav-link px-2 text-muted">Docentes</a></li>
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Estudiantes</a></li>
+                <li class="nav-item"><a href="{{route("estudiantes.index")}}" class="nav-link px-2 text-muted">Estudiantes</a></li>
             </ul>
             @endguest
             <p class="text-center text-muted">&copy; 2023 - CATE ET8</p>

@@ -68,7 +68,7 @@ class DocenteController extends Controller
         $materias = Materia::all();
         $apellido = $request->apellido; 
         $docentes = Docente::where('apellido', 'like', '%' . $apellido . '%')->get();    
-        return view('/vistas.busqueDadocente', ['docentes' => $docentes])->with('materias' , $materias);
+        return view('/vistas.busquedaDocente', ['docentes' => $docentes])->with('materias' , $materias);
     }
 
     /**

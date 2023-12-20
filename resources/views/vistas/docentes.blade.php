@@ -142,7 +142,7 @@
             <th></th>
         </tr>
         </thead>
-        <tbody>
+        <tbody class="table-group-divider">
             
             @foreach ($docentes as $docente)            
             <tr>
@@ -152,13 +152,13 @@
                 <td>{{$docente->email}}</td>
                 <td>{{$docente->telefono}}</td>
                 <td>
-                @if ($docente->rol == "0")
+                    @if ($docente->rol == "0")
                         Coordinador
                     @elseif ($docente->rol == '1')
                         Docente 
                     @elseif ($docente->rol == '2')
                         Preceptor 
-                @endif</td>
+                    @endif</td>
                 <td>{{$docente->materia}}</td>
                 <td>
                 <a href="" data-bs-toggle="modal" data-bs-target="#modalEditar{{$docente->id}}" class="btn btn-warning btn-sm"><i class="fa-regular fa-pen-to-square"></i>

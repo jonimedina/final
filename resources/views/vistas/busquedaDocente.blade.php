@@ -9,7 +9,7 @@
 </div>
 
 
-<table class="table">
+<table class="table table table-hover">
     <thead>
         <tr>
             <th scope="col">ID</th>
@@ -23,7 +23,7 @@
             <th></th>
         </tr>
     </thead>
-    <tbody>
+    <tbody class="table-group-divider">
 
         @foreach($docentes as $docente)
         <tr>
