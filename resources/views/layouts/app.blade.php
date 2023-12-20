@@ -111,7 +111,7 @@
             @else
             <ul class="nav justify-content-center border-bottom pb-3 mb-3">
                 <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Mis Datos</a></li>
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Docentes</a></li>
+                <li class="nav-item"><a href="{{route("docentes.index")}}" class="nav-link px-2 text-muted">Docentes</a></li>
                 <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Estudiantes</a></li>
             </ul>
             @endguest

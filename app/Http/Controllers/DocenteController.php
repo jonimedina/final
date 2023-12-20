@@ -26,11 +26,12 @@ class DocenteController extends Controller
      */
     public function create(Request $request)
     {
+        
         $docente = new Docente;
         $docente->nombre = $request->nombreD;
         $docente->apellido = $request->apellidoD;
         $docente->telefono = $request->telefonoD;
-        $docente->email = $request->emailD;
+        $docente->email = $request->mailD;
         $docente->rol = $request->rolD;
         $docente->materia = $request->materiaD;
 
@@ -64,11 +65,10 @@ class DocenteController extends Controller
      */
     public function buscar(Request $request)
     {
+        $materias = Materia::all();
         $apellido = $request->apellido; 
-
-        $docentes = Docente::where('apellido', 'like', '%' . $apellido . '%')->get();
-    
-        return view('/vistas.busqueDadocente', ['docentes' => $docentes]);
+        $docentes = Docente::where('apellido', 'like', '%' . $apellido . '%')->get();    
+        return view('/vistas.busqueDadocente', ['docentes' => $docentes])->with('materias' , $materias);
     }
 
     /**

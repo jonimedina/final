@@ -24,7 +24,7 @@ return new class extends Migration
                     ->onUpdate('cascade');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('rol');
-            $table->string('materia');
+            $table->string('materia')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

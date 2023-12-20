@@ -34,12 +34,16 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-
                     <form action="{{route("docentes.create")}}" method="POST">
                     @csrf
                         <div class="mb-3">
                             <label for="nombreDocente" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" id="nombre" name="nombreD">
+                            <select class='form-select' name="nombreD" id="nombreD">  
+                                <option>--Elegir nombre del docente--</option>  
+                                @foreach($usuarios as $usuario)                          
+                                    <option value="{{ $usuario->name}}">{{ $usuario->name }}</option>
+                                @endforeach
+                            </select>  
                         </div>
                         <div class="mb-3">
                             <label for="apellidoDocente" class="form-label">Apellido</label>
@@ -52,7 +56,7 @@
                         <div class="mb-3">
                             <label for="email" class="form-label">Mail</label>
                             <select class='form-select' name="mailD" id="mailD">  
-                                <option>Elegir mail del usuario</option>    
+                                <option>--Elegir mail del usuario--</option>    
                                 @foreach($usuarios as $usuario)                          
                                     <option value="{{ $usuario->email}}">{{ $usuario->email }}</option>
                                 @endforeach
@@ -61,7 +65,7 @@
                         <div class="mb-3">
                             <label for="rolDocente" class="form-label">Rol</label>
                             <select class="form-select" aria-label="Default select example" name="rolD">
-                                <option>Elegir rol</option>
+                                <option>--Elegir rol--</option>
                                 <option value="0">Coordinador</option>
                                 <option value="1">Docente</option>
                                 <option value="2">Preceptor</option>
@@ -70,7 +74,8 @@
                         <div class="mb-3">
                             <label for="materiaDocente" class="form-label">Materia</label>                            
                             <select class='form-select' name="materiaD" id="materiaD">      
-                                <option>Elegir materia</option>
+                                <option>--Elegir materia--</option>
+                                <option>No corresponde</option>
                                 @foreach($materias as $materia)                          
                                     <option value="{{ $materia->nombre}}">{{ $materia->nombre }}</option>
                                 @endforeach
@@ -199,13 +204,7 @@
                                 <div class="mb-3">
                                     <label for="rolDocente" class="form-label">Rol</label>
                                     <select class="form-select" aria-label="Default select example" name="rolD">
-                                        <option>@if ($docente->rol == "0")
-                                                --Coordinador--
-                                            @elseif ($docente->rol == '1')
-                                                --Docente--
-                                            @elseif ($docente->rol == '2')
-                                                --Preceptor--
-                                        @endif</option>                                     
+                                        <option>--Elegir rol--</option>                                     
                                         <option value="0">Coordinador</option>
                                         <option value="1">Docente</option>
                                         <option value="2">Preceptor</option>
@@ -214,6 +213,8 @@
                                 <div class="mb-3">
                                     <label for="materiaDocente" class="form-label">Materia</label>
                                     <select class='form-select' name="materiaD" id="materiaD"> 
+                                        <option>--Elegir materia--</option>
+                                        <option>No corresponde</option>
                                         <option>{{$docente->materia}}</option>
                                         @foreach($materias as $materia)                          
                                             <option value="{{ $materia->nombre}}">{{$materia->nombre}}</option>
