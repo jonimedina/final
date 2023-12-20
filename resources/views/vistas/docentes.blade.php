@@ -15,7 +15,8 @@
     <table class="table table-striped table-hover">
 
         <div class="d-grid gap-2 d-md-flex justify-content-md-end" >
-            <button type="button" class="btn btn-success"  data-bs-toggle="modal" data-bs-target="#modalAgregar">Agregar docente</button>
+            <button type="button" class="btn btn-success"  data-bs-toggle="modal" data-bs-target="#modalAgregarDocente">Agregar docente</button>
+            <button type="button" class="btn btn-success"  data-bs-toggle="modal" data-bs-target="#modalAgregarMateria">Agregar materia</button>
         </div>
 
         <div class="d-grid gap-2 d-md-flex justify-content-md-end pt-2" >
@@ -25,7 +26,7 @@
 
 
         <!-- Modal de Registro de docente-->
-        <div class="modal fade" id="modalAgregar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="modalAgregarDocente" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -50,7 +51,12 @@
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Mail</label>
-                            <input type="email" class="form-control" id="email" name="emailD">
+                            <select class='form-select' name="mailD" id="mailD">  
+                                <option>Elegir mail del usuario</option>    
+                                @foreach($usuarios as $usuario)                          
+                                    <option value="{{ $usuario->email}}">{{ $usuario->email }}</option>
+                                @endforeach
+                            </select>    
                         </div>
                         <div class="mb-3">
                             <label for="rolDocente" class="form-label">Rol</label>
@@ -62,21 +68,55 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="materiaDocente" class="form-label">Materia</label>
-                            <select class="form-select" aria-label="Default select example" name="materiaD">
+                            <label for="materiaDocente" class="form-label">Materia</label>                            
+                            <select class='form-select' name="materiaD" id="materiaD">      
                                 <option>Elegir materia</option>
-                                <option value="Fisica">Fisica</option>
-                                <option value="Matemática">Matemática</option>
-                                <option value="TDR">Tecnología de la representación</option>
-                                <option value="Historia">Historia</option>
-                                <option value="Geografía">Geografía</option>
-                                <option value="FEC">Formación ética y ciudadana</option>
-                            </select>
+                                @foreach($materias as $materia)                          
+                                    <option value="{{ $materia->nombre}}">{{ $materia->nombre }}</option>
+                                @endforeach
+                            </select>                            
                         </div>
-
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                             <button type="submit" class="btn btn-primary">Registrar</button>
+                            </div>
+                    </form>
+                </div>
+                
+            </div>
+            </div>
+        </div>
+
+        <!-- Modal de Nueva Materia-->
+        <div class="modal fade" id="modalAgregarMateria" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar nueva materia</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <form action="{{route("materia.create")}}" method="POST">
+                    @csrf
+                        <div class="mb-3">
+                            <label for="nombreMateria" class="form-label">Nombre de la materia</label>
+                            <input type="text" class="form-control" id="nombre" name="nombreMateria">
+                        </div>
+                        <div class="mb-3">
+                            <label for="anioMateria" class="form-label">Año</label>
+                            <select class='form-select' name="anioMateria">
+                                <option value="1">1° Año</option>
+                                <option value="2">2° Año</option>
+                                <option value="3">3° Año</option>
+                                <option value="4">4° Año</option>
+                                <option value="5">5° Año</option>
+                                <option value="6">6° Año</option>
+                            </select>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button type="submit" class="btn btn-primary">Agregar</button>
                             </div>
                     </form>
                 </div>
@@ -99,7 +139,7 @@
         </thead>
         <tbody>
             
-            @foreach ($datos as $docente)            
+            @foreach ($docentes as $docente)            
             <tr>
                 <th>{{$docente->id}}</th>
                 <td>{{$docente->nombre}}</td>
@@ -109,16 +149,17 @@
                 <td>
                 @if ($docente->rol == "0")
                         Coordinador
-                    @else 
-                        Docente                    
+                    @elseif ($docente->rol == '1')
+                        Docente 
+                    @elseif ($docente->rol == '2')
+                        Preceptor 
                 @endif</td>
                 <td>{{$docente->materia}}</td>
                 <td>
                 <a href="" data-bs-toggle="modal" data-bs-target="#modalEditar{{$docente->id}}" class="btn btn-warning btn-sm"><i class="fa-regular fa-pen-to-square"></i>
                 </td>
-                
-
-                <td><a href="{{route("docentes.destroy", $docente->id)}}" onclick="return confirm('Se eliminarán los datos')" class="btn btn-danger btn-sm"><i class="fa-regular fa-trash-can"></i>
+                <td>
+                <a href="{{route("docentes.destroy", $docente->id)}}" onclick="return confirm('Se eliminarán los datos')" class="btn btn-danger btn-sm"><i class="fa-regular fa-trash-can"></i>
                 @method("DELETE")
                 </td>
                 
@@ -158,7 +199,13 @@
                                 <div class="mb-3">
                                     <label for="rolDocente" class="form-label">Rol</label>
                                     <select class="form-select" aria-label="Default select example" name="rolD">
-                                        <option>{{$docente->rol}}</option>
+                                        <option>@if ($docente->rol == "0")
+                                                --Coordinador--
+                                            @elseif ($docente->rol == '1')
+                                                --Docente--
+                                            @elseif ($docente->rol == '2')
+                                                --Preceptor--
+                                        @endif</option>                                     
                                         <option value="0">Coordinador</option>
                                         <option value="1">Docente</option>
                                         <option value="2">Preceptor</option>
@@ -166,15 +213,12 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="materiaDocente" class="form-label">Materia</label>
-                                    <select class="form-select" aria-label="Default select example" name="materiaD">
+                                    <select class='form-select' name="materiaD" id="materiaD"> 
                                         <option>{{$docente->materia}}</option>
-                                        <option value="Fisica">Fisica</option>
-                                        <option value="Matemática">Matemática</option>
-                                        <option value="TDR">Tecnología de la representación</option>
-                                        <option value="Historia">Historia</option>
-                                        <option value="Geografía">Geografía</option>
-                                        <option value="FEC">Formación ética y ciudadana</option>
-                                    </select>
+                                        @foreach($materias as $materia)                          
+                                            <option value="{{ $materia->nombre}}">{{$materia->nombre}}</option>
+                                        @endforeach
+                                    </select> 
                                 </div>
 
                                 <div class="modal-footer">
@@ -194,7 +238,7 @@
         </tbody>
     </table>
     <div class="pagination justify-content-center">
-        {{$datos->links('pagination::bootstrap-4')}}
+        {{$docentes->links('pagination::bootstrap-4')}}
     </div>
 </div>
 @endsection

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Docente;
+use App\Models\Materia;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
@@ -14,8 +15,10 @@ class DocenteController extends Controller
      */
     public function index()
     {
-        $datos = Docente::orderBy('id','ASC')->paginate(10);
-        return view("/vistas.docentes")->with("datos", $datos);
+        $docentes = Docente::orderBy('id','ASC')->paginate(10);
+        $materias = Materia::all();
+        $usuarios = User::all();
+        return view("/vistas.docentes")->with('docentes', $docentes)->with('usuarios', $usuarios)->with('materias', $materias);
     }
 
     /**
@@ -71,26 +74,22 @@ class DocenteController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        $sql=DB::update('update docentes set nombre=?, apellido=?, telefono=?, rol=?, materia=? where id= ?', [
-            /*$request->idD,*/
-            $request->nombreD,
-            $request->apellidoD,
-            $request->telefonoD,
-            /*$request->emailD,*/
-            $request->rolD,
-            $request->materiaD,
-            $request->idD
-        ]);
+        $docente = Docente::find($id);
 
-        if ($sql == true){
+        if ($docente){
+            $docente->nombre = $request->nombreD;
+            $docente->apellido = $request->apellidoD;
+            $docente->telefono = $request->telefonoD;
+            $docente->rol = $request->rolD;
+            $docente->materia = $request->materiaD;
+
+        $docente->save();
             return back()->with("correcto", "Docente modificado correctamente");
         } else {
             return back()->with("incorrecto", "Error al modificar docente");
         }
-
-        return;
     }
 
     /**

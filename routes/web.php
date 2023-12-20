@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DocenteController;
+use App\Http\Controllers\MateriaController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,6 +29,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 //Rutas de Docentes
 Route::get('/docentes', [DocenteController::class, 'index'])->name('docentes.index');
 Route::post('/registro-docente', [DocenteController::class, 'create'])->name('docentes.create');
-Route::post('/editar-docente', [DocenteController::class, 'update'])->name('docentes.update');
+Route::post('/editar-docente{id}', [DocenteController::class, 'update'])->name('docentes.update');
 Route::get('/eliminar-docente', [DocenteController::class, 'destroy'])->name('docentes.destroy');
 Route::get('/buscar-docente', [DocenteController::class, 'buscar'])->name('docentes.buscar');
+
+Route::post('/nueva-materia', [MateriaController::class, 'create'])->name('materia.create');

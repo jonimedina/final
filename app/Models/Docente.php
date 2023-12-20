@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Materia;
 
 class Docente extends Model
 {
@@ -26,8 +27,11 @@ class Docente extends Model
         'email_verified_at' => 'datetime',
     ];
 
-    public function user()
-    {
+    public function user(){
         return $this->belongsTo(User::class, 'email', 'email');
+    }
+
+    public function materias(){
+        return $this->hasMany(Materia::class);
     }
 }
