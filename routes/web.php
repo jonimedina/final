@@ -30,7 +30,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/docentes', [DocenteController::class, 'index'])->name('docentes.index');
 Route::post('/registro-docente', [DocenteController::class, 'create'])->name('docentes.create');
 Route::post('/editar-docente{id}', [DocenteController::class, 'update'])->name('docentes.update');
-Route::get('/eliminar-docente', [DocenteController::class, 'destroy'])->name('docentes.destroy');
+Route::get('/eliminar-docente{id}', [DocenteController::class, 'destroy'])->name('docentes.destroy');
 Route::get('/buscar-docente', [DocenteController::class, 'buscar'])->name('docentes.buscar');
 
 Route::post('/nueva-materia', [MateriaController::class, 'create'])->name('materia.create');
