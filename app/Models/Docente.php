@@ -27,6 +27,18 @@ class Docente extends Model
         'email_verified_at' => 'datetime',
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::updating(function ($docente) {
+            $user = $docente->user;
+            if ($user) {
+                $user->update(['rol' => $docente->rol]);
+            }
+        });
+    }
+
     public function user(){
         return $this->belongsTo(User::class, 'email', 'email');
     }
@@ -34,4 +46,6 @@ class Docente extends Model
     public function materias(){
         return $this->hasMany(Materia::class);
     }
+
+
 }

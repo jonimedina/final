@@ -48,4 +48,28 @@ class User extends Authenticatable
     public function docente(){
         return $this->hasOne(Docente::class,'email','email');
     }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::created(function ($user) {
+            $user->crearDocente();
+        });
+    }
+
+    public function crearDocente()
+    {
+        $docenteExistente = Docente::where('email', ['email'])->first();
+        if (!$docenteExistente) {
+        $this->docente()->create([
+            'nombre' => $this->name,
+            'email' => $this->email,
+            'apellido'=> '',
+            'telefono'=>'',
+            'rol'=>'Docente',
+            'materia'=>'',]);
+        } 
+        
+    }
 }

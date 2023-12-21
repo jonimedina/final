@@ -26,16 +26,36 @@ class DocenteController extends Controller
      */
     public function create(Request $request)
     {
-        
-        $docente = new Docente;
-        $docente->nombre = $request->nombreD;
-        $docente->apellido = $request->apellidoD;
-        $docente->telefono = $request->telefonoD;
-        $docente->email = $request->mailD;
-        $docente->rol = $request->rolD;
-        $docente->materia = $request->materiaD;
+        $usuarioExistente = User::where('email', $request['email'])->first();
 
-        $docente->save();
+        // Si el usuario no existe, lo crea y luego crea el docente
+        if (!$usuarioExistente) {
+            $usuario = new User;
+            $usuario->name = $request->nombreD;
+            $usuario->email = $request->mailD;
+            $usuario->rol = $request->rolD;
+            $usuario->password = 'docente123';
+            $usuario->save();
+
+            $docente = Docente::where('email', $usuario['email'])->first();
+            $docente->apellido = $request->apellidoD;
+            $docente->telefono = $request->telefonoD;
+            $docente->rol = $request->rolD;
+            $docente->materia = $request->materiaD;
+            $docente->save();
+        } else {
+        //Si el usuario existe, crea el docente
+            $docente = new Docente;
+            $docente->nombre = $request->nombreD;
+            $docente->apellido = $request->apellidoD;
+            $docente->telefono = $request->telefonoD;
+            $docente->email = $request->mailD;
+            $docente->rol = $request->rolD;
+            $docente->materia = $request->materiaD;
+    
+            $docente->save();
+            }
+
 
         if ($docente == true){
             return back()->with("correcto", "Docente agregado correctamente");
@@ -100,8 +120,11 @@ class DocenteController extends Controller
         $docente = Docente::find($id);
         $docente->delete();
 
+        $usuarioExistente = User::where('email', $docente['email'])->first();        
+        $usuarioExistente->delete();
+
         if ($docente == true){
-            return back()->with("correcto", "Se eliminó el registro correctamente");
+            return back()->with("correcto", "Se eliminó el docente y usuario correctamente");
         } else {
             return back()->with("incorrecto", "Error al eliminar el registro");
         }

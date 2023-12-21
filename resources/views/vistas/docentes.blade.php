@@ -38,12 +38,7 @@
                     @csrf
                         <div class="mb-3">
                             <label for="nombreDocente" class="form-label">Nombre</label>
-                            <select class='form-select' name="nombreD" id="nombreD">  
-                                <option>--Elegir nombre del docente--</option>  
-                                @foreach($usuarios as $usuario)                          
-                                    <option value="{{ $usuario->name}}">{{ $usuario->name }}</option>
-                                @endforeach
-                            </select>  
+                            <input type="text" class="form-control" id="nombre" name="nombreD">
                         </div>
                         <div class="mb-3">
                             <label for="apellidoDocente" class="form-label">Apellido</label>
@@ -55,12 +50,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Mail</label>
-                            <select class='form-select' name="mailD" id="mailD">  
-                                <option>--Elegir mail del usuario--</option>    
-                                @foreach($usuarios as $usuario)                          
-                                    <option value="{{ $usuario->email}}">{{ $usuario->email }}</option>
-                                @endforeach
-                            </select>    
+                            <input type="email" class="form-control" id="mail" name="mailD">
                         </div>
                         <div class="mb-3">
                             <label for="rolDocente" class="form-label">Rol</label>

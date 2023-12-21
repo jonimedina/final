@@ -32,13 +32,7 @@
             <td>{{$docente->apellido}}</td>
             <td>{{$docente->email}}</td>
             <td>{{$docente->telefono}}</td>
-            <td>@if ($docente->rol == "0")
-                Coordinador
-            @elseif ($docente->rol == '1')
-                Docente 
-            @elseif ($docente->rol == '2')
-                Preceptor 
-            @endif</td>
+            <td>{{$docente->rol}}</td>
             <td>{{$docente->materia}}</td>
             <td>
                 <a href="" data-bs-toggle="modal" data-bs-target="#modalEditar{{$docente->id}}" class="btn btn-warning btn-sm"><i class="fa-regular fa-pen-to-square"></i>
