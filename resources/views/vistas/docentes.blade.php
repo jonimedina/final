@@ -66,9 +66,9 @@
                             <label for="rolDocente" class="form-label">Rol</label>
                             <select class="form-select" aria-label="Default select example" name="rolD">
                                 <option>--Elegir rol--</option>
-                                <option value="0">Coordinador</option>
-                                <option value="1">Docente</option>
-                                <option value="2">Preceptor</option>
+                                <option value="Coordinador">Coordinador</option>
+                                <option value="Docente">Docente</option>
+                                <option value="Preceptor">Preceptor</option>
                             </select>
                         </div>
                         <div class="mb-3">
@@ -151,14 +151,7 @@
                 <td>{{$docente->apellido}}</td>
                 <td>{{$docente->email}}</td>
                 <td>{{$docente->telefono}}</td>
-                <td>
-                    @if ($docente->rol == "0")
-                        Coordinador
-                    @elseif ($docente->rol == '1')
-                        Docente 
-                    @elseif ($docente->rol == '2')
-                        Preceptor 
-                    @endif</td>
+                <td>{{$docente->rol}}</td>
                 <td>{{$docente->materia}}</td>
                 <td>
                 <a href="" data-bs-toggle="modal" data-bs-target="#modalEditar{{$docente->id}}" class="btn btn-warning btn-sm"><i class="fa-regular fa-pen-to-square"></i>
@@ -205,9 +198,9 @@
                                     <label for="rolDocente" class="form-label">Rol</label>
                                     <select class="form-select" aria-label="Default select example" name="rolD">
                                         <option>--Elegir rol--</option>                                     
-                                        <option value="0">Coordinador</option>
-                                        <option value="1">Docente</option>
-                                        <option value="2">Preceptor</option>
+                                        <option value="Coordinador">Coordinador</option>
+                                        <option value="Docente">Docente</option>
+                                        <option value="Preceptor">Preceptor</option>
                                     </select>
                                 </div>
                                 <div class="mb-3">
