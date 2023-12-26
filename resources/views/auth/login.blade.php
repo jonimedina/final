@@ -7,7 +7,7 @@
             <h1 class="h3 mb-3 fw-normal">Ingrese a su cuenta</h1>
             <i class="fa-solid fa-right-to-bracket fa-2xl mb-3" style="color: #000000;"></i>
             <div class="card-body">
-                <form method="POST" action="{{ route('login') }}">
+                <form method="POST" action="{{ route('home') }}">
                     @csrf
 
                     <div class="row mb-3">
