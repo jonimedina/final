@@ -4,8 +4,8 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="alert alert-primary" role="alert">{{ __('Recuperá tu contraseña') }}</div>
+            <div class="card text-bg-warning mb-3">
+                <div class="alert alert-warning" role="alert">{{ __('Recuperá tu contraseña') }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -31,12 +31,10 @@
                             </div>
                         </div>
 
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-info">
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button type="submit" class="btn btn-outline-light me-md-2">
                                     {{ __('Enviar Link') }}
-                                </button>
-                            </div>
+                            </button>
                         </div>
                     </form>
                 </div>

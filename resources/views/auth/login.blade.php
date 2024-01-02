@@ -1,17 +1,19 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="text-center">
+<div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <h1 class="h3 mb-3 fw-normal">Ingrese a su cuenta</h1>
-            <i class="fa-solid fa-right-to-bracket fa-2xl mb-3" style="color: #000000;"></i>
+            <div class="card text-bg-primary mb-3">
+                <div class="card-body">
+            <h1 class="h3 mb-3 fw-lg text-center">Ingrese a su cuenta </h1>
+
             <div class="card-body">
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
 
                     <div class="row mb-3">
-                        <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email') }}</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-end"><i class="fa-solid fa-envelope fa-lg"></i>{{ __(' Email') }}</label>
                         <div class="col-md-6">
                             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
@@ -24,7 +26,7 @@
                     </div>
 
                     <div class="row mb-3">
-                        <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Contraseña') }}</label>
+                        <label for="password" class="col-md-4 col-form-label text-md-end"><i class="fa-solid fa-key fa-lg"></i>{{ __(' Contraseña') }}</label>
                         <div class="col-md-6">
                             <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
 
@@ -49,22 +51,23 @@
 
                     
                         <div class="text-center mb-3 mt-3">
-                            <button type="submit" class="w-20 btn btn-lg btn-primary mb-2">
+                            <button type="submit" class="btn btn-outline-light btn-lg">
                                 {{ __('Ingresar') }}
                             </button>
-                            <br>
+                            <div class="text-center mb-3 mt-3">
                             @if (Route::has('password.request'))
-                                <a class="link-info link-offset-2 text-muted link-underline-opacity-100-hover mt-5" href="{{ route('password.request') }}">
+                                <a class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="{{ route('password.request') }}">
                                     {{ __('Olvidó su contraseña?') }}
                                 </a>
                             @endif
+                            </div>
                         </div>
                     
                 </form>
                 
             </div>
         </div>
-    
+    </div>
 </div>
 </div>
 @endsection
