@@ -23,6 +23,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $this->middleware('auth');
         return view('/vistas.homeCoordinador');
     }
 }

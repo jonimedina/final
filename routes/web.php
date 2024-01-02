@@ -3,6 +3,7 @@
 use App\Http\Controllers\DocenteController;
 use App\Http\Controllers\MateriaController;
 use App\Http\Controllers\EstudianteController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,7 +24,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::post('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::post('/home', [HomeController::class, 'index'])->name('home');
 
 //Route::view('/docentes' , '/vistas.docentes');
 Route::view('/perfil' , '/vistas.perfil');
