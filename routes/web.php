@@ -26,6 +26,7 @@ Auth::routes();
 Route::post('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 //Route::view('/docentes' , '/vistas.docentes');
+Route::view('/perfil' , '/vistas.perfil');
 
 //Rutas de Docentes
 Route::get('/docentes', [DocenteController::class, 'index'])->name('docentes.index');
