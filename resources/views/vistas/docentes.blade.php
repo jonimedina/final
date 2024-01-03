@@ -225,4 +225,20 @@
         {{$docentes->links('pagination::bootstrap-4')}}
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#rolD').change(function() {
+            var selectedRol = $(this).val();
+            if (selectedRol === 'Coordinador' || selectedRol === 'Preceptor') {
+                $('#materiaD option').not(':first-child, :contains("No corresponde")').hide();
+                $('#materiaD').val('No corresponde');
+            } else {
+                $('#materiaD option').show();
+            }
+        });
+    });
+</script>
+
 @endsection

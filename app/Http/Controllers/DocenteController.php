@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Docente;
 use App\Models\Materia;
 use App\Models\User;
+use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\DB;
+
 
 class DocenteController extends Controller
 {
@@ -36,7 +38,10 @@ class DocenteController extends Controller
             $usuario->rol = $request->rolD;
             $usuario->password = 'docente123';
             $usuario->save();
-
+            
+            $rol = $request->rolD; 
+            $usuario->assignRole($rol);
+            
             $docente = Docente::where('email', $usuario['email'])->first();
             $docente->apellido = $request->apellidoD;
             $docente->telefono = $request->telefonoD;
@@ -105,7 +110,12 @@ class DocenteController extends Controller
             $docente->rol = $request->rolD;
             $docente->materia = $request->materiaD;
 
-        $docente->save();
+            $docente->save();
+
+            $usuario = User::where('email', $docente->email)->first();
+            $rol = $request->rolD; 
+            $usuario->assignRole($rol);
+
             return back()->with("correcto", "Docente modificado correctamente");
         } else {
             return back()->with("incorrecto", "Error al modificar docente");
