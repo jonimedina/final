@@ -54,7 +54,7 @@
                                 </a>
                                 <div class="flex-shrink-0 dropdown" aria-labelledby="navbarDropdown">
                                     <ul class="dropdown-menu text-small shadow">
-                                        <li><a class="dropdown-item" href="#">Mis datos</a></li>
+                                        <li><a class="dropdown-item" href="{{route("perfil")}}">Mis datos</a></li>
                                         <li><a class="dropdown-item" href="{{route("docentes.index")}}">Docentes</a></li>
                                         <li><a class="dropdown-item" href="{{route("estudiantes.index")}}">Estudiantes</a></li>
                                         <li><hr class="dropdown-divider"></li>
