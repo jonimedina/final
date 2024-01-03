@@ -113,8 +113,10 @@ class DocenteController extends Controller
             $docente->save();
 
             $usuario = User::where('email', $docente->email)->first();
-            $rol = $request->rolD; 
-            $usuario->assignRole($rol);
+            $rolAnterior = $usuario->rol;
+            $usuario->removeRole($rolAnterior);
+            $rolNuevo = $request->rolD; 
+            $usuario->assignRole($rolNuevo);
 
             return back()->with("correcto", "Docente modificado correctamente");
         } else {

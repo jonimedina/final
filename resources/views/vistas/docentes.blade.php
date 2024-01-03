@@ -15,8 +15,12 @@
     <table class="table table-striped table-hover">
 
         <div class="d-grid gap-2 d-md-flex justify-content-md-end" >
+            @can('docentes.create')
             <button type="button" class="btn btn-success"  data-bs-toggle="modal" data-bs-target="#modalAgregarDocente">Agregar docente</button>
+            @endcan
+            @can('materia.create')
             <button type="button" class="btn btn-success"  data-bs-toggle="modal" data-bs-target="#modalAgregarMateria">Agregar materia</button>
+            @endcan
         </div>
 
         <div class="d-grid gap-2 d-md-flex justify-content-md-end pt-2" >
@@ -143,14 +147,17 @@
                 <td>{{$docente->telefono}}</td>
                 <td>{{$docente->rol}}</td>
                 <td>{{$docente->materia}}</td>
+                @can('docentes.update')
                 <td>
                 <a href="" data-bs-toggle="modal" data-bs-target="#modalEditar{{$docente->id}}" class="btn btn-warning btn-sm"><i class="fa-regular fa-pen-to-square"></i>
                 </td>
+                @endcan
+                @can('docentes.destroy')
                 <td>
                 <a href="{{route("docentes.destroy", $docente->id)}}" onclick="return confirm('Se eliminarán los datos')" class="btn btn-danger btn-sm"><i class="fa-regular fa-trash-can"></i>
                 @method("DELETE")
                 </td>
-                
+                @endcan
 
                 <!-- Modal de Editar-->
                 
@@ -226,18 +233,26 @@
     </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 <script>
     $(document).ready(function() {
-        $('#rolD').change(function() {
+        $('select[name="rolD"]').change(function() {
             var selectedRol = $(this).val();
             if (selectedRol === 'Coordinador' || selectedRol === 'Preceptor') {
                 $('#materiaD option').not(':first-child, :contains("No corresponde")').hide();
-                $('#materiaD').val('No corresponde');
+                $('#materiaD').val('No corresponde').prop('disabled', true); // Deshabilitar el campo
             } else {
                 $('#materiaD option').show();
+                $('#materiaD').prop('disabled', false); // Habilitar el campo si no es Coordinador o Preceptor
             }
         });
+
+        // Establecer el valor predeterminado al cargar la página
+        var selectedRol = $('select[name="rolD"]').val();
+        if (selectedRol === 'Coordinador' || selectedRol === 'Preceptor') {
+            $('#materiaD option').not(':first-child, :contains("No corresponde")').hide();
+            $('#materiaD').val('No corresponde').prop('disabled', true); // Deshabilitar el campo inicialmente
+        }
     });
 </script>
 
